@@ -3,6 +3,7 @@ import { ReactSketchCanvas } from "react-sketch-canvas";
 import logo from "./../../images/logo.png";
 import "./Style.css";
 import { useNavigate } from "react-router-dom";
+import endpoint from "../..";
 
 function ResetPass(props) {
   let otp;
@@ -82,7 +83,7 @@ function ResetPass(props) {
     token = token.split("=")[1];
     try {
       const response = await fetch(
-        `http://localhost:5000/users/verifyOTP?otp=${otp}&token=${token}&pass=${password}`
+        `${endpoint}users/verifyOTP?otp=${otp}&token=${token}&pass=${password}`
       );
       const data = await response.json();
       console.log(data);

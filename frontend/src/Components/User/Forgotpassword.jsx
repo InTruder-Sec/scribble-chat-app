@@ -5,6 +5,7 @@ import "./Style.css";
 import { useNavigate } from "react-router-dom";
 import fpVideo from "./../../images/forgotpassword.mp4";
 import { ChangeToLogin } from "./Main";
+import endpoint from "../..";
 
 function ForgotPassword(props) {
   const displayNone = {
@@ -20,9 +21,7 @@ function ForgotPassword(props) {
   async function SendOTP() {
     setloading(true);
     try {
-      const res = await fetch(
-        `http://localhost:5000/users/sendotp?email=${Email}`
-      );
+      const res = await fetch(`${endpoint}users/sendotp?email=${Email}`);
       const data = await res.json();
       if (data.code === 200) {
         setloading(false);

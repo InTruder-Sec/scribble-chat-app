@@ -1,6 +1,8 @@
+import endpoint from "..";
+
 const CheckSession = async (setloading) => {
   try {
-    const data = await fetch(`http://localhost:5000/users/session`, {
+    const data = await fetch(`${endpoint}users/session`, {
       method: "get",
       credentials: "include",
       headers: {

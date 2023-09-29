@@ -2,10 +2,11 @@ import {
   SenderChats,
   ReciverChats,
 } from "./../Components/Messenger/ChatDesigns";
+import endpoint from "./../index";
 
 const GetChats = async (id, setresultChats, SessionUser) => {
   try {
-    const res = await fetch(`http://localhost:5000/users/getchats?id=${id}`);
+    const res = await fetch(`${endpoint}users/getchats?id=${id}`);
     const data = await res.json();
     console.log(data);
     let resChats = await data.data.map(async (e) => {

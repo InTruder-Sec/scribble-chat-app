@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "./Style.css";
 import logo from "./../../images/logo.png";
 import { ChangeToCreateAccount, ChangeToForgotPass } from "./Main";
+import endpoint from "../..";
 
 function Login(props) {
   // Invalid username password styles
@@ -27,7 +28,7 @@ function Login(props) {
     setloading(true);
     try {
       const response = await fetch(
-        `http://localhost:5000/users/verify?email=${email}&pass=${password}`,
+        `${endpoint}users/verify?email=${email}&pass=${password}`,
         {
           method: "GET",
           credentials: "include",

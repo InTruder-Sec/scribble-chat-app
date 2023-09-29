@@ -9,7 +9,7 @@ import { userRouter } from "./routes/user.js";
 dotenv.config();
 const app = express();
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "https://scribblechat.netlify.app",
   credentials: true,
 };
 app.use(cors(corsOptions));
@@ -25,8 +25,8 @@ app.use("/users", userRouter);
 const connection = await mongoose.connect(process.env.SERVER_URL);
 
 // Listen for socket.io connections
-const server = app.listen(5000, () => {
-  console.log("Server running on port 3000");
+const server = app.listen(8080, () => {
+  console.log("Server running on port 8080");
 });
 
 // const io = new Server(server, {

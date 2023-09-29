@@ -4,6 +4,7 @@ import { ToggleTheme } from "../../App";
 import Modal from "@mui/material/Modal";
 import "./settings.css";
 import { useNavigate } from "react-router-dom";
+import endpoint from "../..";
 
 function Settings(props) {
   console.log(props);
@@ -23,7 +24,7 @@ function Settings(props) {
   // Logout function remove cookie and redirect to login page
   const Logout = async () => {
     try {
-      await fetch("http://localhost:5000/users/logout", {
+      await fetch(`${endpoint}users/logout`, {
         method: "GET",
         credentials: "include",
       });

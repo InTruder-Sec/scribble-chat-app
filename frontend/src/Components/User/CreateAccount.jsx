@@ -3,6 +3,7 @@ import { useState } from "react";
 import logo from "./../../images/logo.png";
 import "./Style.css";
 import { ChangeToLogin } from "./Main";
+import endpoint from "../..";
 
 function CreateAccount(props) {
   const displayNone = {
@@ -16,7 +17,7 @@ function CreateAccount(props) {
   const [email, setemail] = useState("");
 
   async function CreateNewUser() {
-    const res = await fetch("http://localhost:5000/users/create", {
+    const res = await fetch(`${endpoint}users/create`, {
       method: "POST",
       mode: "cors",
       headers: {
