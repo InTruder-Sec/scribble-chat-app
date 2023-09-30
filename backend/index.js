@@ -26,7 +26,7 @@ const connection = await mongoose.connect(process.env.SERVER_URL);
 
 // Listen for socket.io connections
 const server = app.listen(5000, () => {
-  console.log("Server running on port 5000");
+  console.log("Server running on port 3000");
 });
 
 // const io = new Server(server, {
