@@ -25,7 +25,7 @@ const GetChats = (req, res) => {
       res.status(200).json({ message: "NO" });
     }
   } else {
-    res.status(200).json({ message: "OK", data: {} });
+    res.status(200).json({ message: "OK", data: [] });
   }
 };
 

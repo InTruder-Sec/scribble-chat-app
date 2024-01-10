@@ -4,6 +4,7 @@ import { sendOtp, verifyOtp } from "../controllers/OTP.js";
 import { userLogout, userSession } from "../controllers/session.js";
 import { ChatHandeler } from "../controllers/Chats.js";
 import { GetChats } from "../controllers/FetchChats.js";
+import getRoomId from "../controllers/RoomId.js";
 
 const userRouter = express.Router();
 
@@ -16,5 +17,6 @@ userRouter.get("/session", userSession);
 userRouter.get("/logout", userLogout);
 userRouter.post("/sendchat", ChatHandeler);
 userRouter.get("/getchats", GetChats);
+userRouter.get("/getroomid", getRoomId);
 
 export { userRouter };

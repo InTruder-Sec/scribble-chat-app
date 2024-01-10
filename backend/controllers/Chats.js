@@ -51,8 +51,9 @@ export const ChatHandeler = async (req, res) => {
             // PushMessage to history in appwrite database
           } else {
             // Create new Document, Add to current, other users's Chat History
-
-            CreateNewChat(R_ID, S_ID, URL, S_USERNAME, R_USERNAME);
+            let socketId =
+              "id" + new Date().getTime() + Math.random().toString(32).slice(2);
+            CreateNewChat(R_ID, S_ID, URL, S_USERNAME, R_USERNAME, socketId);
             await res
               .status(200)
               .json({ message: "Chat successfilly added!", ImageUrl: URL });
