@@ -81,6 +81,17 @@
   margin: 10px;
 }
 
+.skeleton {
+  width: 40%;
+  height: 195px;
+  position: absolute;
+  background-color: #fff;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .user--chat--content {
   height: 195px;
   width: 40%;

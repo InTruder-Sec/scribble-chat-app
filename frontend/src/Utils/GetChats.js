@@ -8,19 +8,12 @@ const GetChats = async (id, setresultChats, SessionUser) => {
   try {
     const res = await fetch(`${endpoint}users/getchats?id=${id}`);
     const data = await res.json();
-    console.log(data);
-    let resChats = await data.data.map(async (e) => {
-      const ObjectData = JSON.parse(e);
-      const image = await fetch(ObjectData.imgLink);
-      const imageJson = await image.text();
-      if (ObjectData.sendersId === SessionUser.id) {
-        return <ReciverChats pngData={imageJson} />;
-      } else {
-        return <SenderChats pngData={imageJson} />;
-      }
-    });
-    const finalRes = await Promise.all(resChats);
-    setresultChats(finalRes);
+    console.log(data.data);
+    if (data.data.length === 0) {
+      setresultChats([]);
+      return;
+    }
+    setresultChats(data.data);
   } catch (err) {
     console.log("error: " + err);
   }

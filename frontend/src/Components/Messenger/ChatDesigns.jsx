@@ -1,12 +1,28 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 const SenderChats = ({ pngData }) => {
+  const [image, setimage] = useState("");
+
+  const [loading, setloading] = useState(true);
+
+  useEffect(() => {
+    axios.get(pngData).then((res) => {
+      setimage(res.data);
+      setloading(false);
+    });
+  }, [pngData]);
+
+  // setskeleton loading
+
   return (
     <>
       <div className="s--chat--main">
         <div className="user--logo">A</div>
         <img
-          alt="Something went wrong!"
-          src={pngData}
-          className="user--chat--content"
+          alt="loading..."
+          src={image}
+          className={`user--chat--content ${loading ? "skeleton" : ""}`}
         ></img>
       </div>
     </>
@@ -14,15 +30,18 @@ const SenderChats = ({ pngData }) => {
 };
 
 const ReciverChats = ({ pngData }) => {
+  const [image, setimage] = useState("");
+
+  useEffect(() => {
+    axios.get(pngData).then((res) => {
+      setimage(res.data);
+    });
+  }, [pngData]);
   return (
     <>
       <div className="s--chat--main reciver">
         <div className="user--logo">A</div>
-        <img
-          alt="Something went wrong!"
-          className="user--chat--content"
-          src={pngData}
-        ></img>
+        <img alt="loading..." className="user--chat--content" src={image}></img>
       </div>
     </>
   );

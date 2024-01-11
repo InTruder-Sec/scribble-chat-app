@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 
-const endpoint = "https://backend-sc.azurewebsites.net/";
+const endpoint = "http://localhost:4000/";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

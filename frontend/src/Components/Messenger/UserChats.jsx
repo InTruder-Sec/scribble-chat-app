@@ -6,28 +6,58 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { SvgUpload } from "../../Utils/SendChats";
 import GetChats from "../../Utils/GetChats";
 import { ReciverChats, SenderChats } from "./ChatDesigns";
+import socketIO from "socket.io-client";
+import endpoint from "../..";
 
 function UserChats(props) {
   // Logged in user details
   let SessionUser = useContext(UserDetailsGlobal);
+  useEffect(() => {
+    const socket = socketIO.connect("http://localhost:4000");
+
+    // fetch(`${endpoint}users/getroomid?id=${}`);
+
+    socket.on("connect", () => {
+      console.log("Connected to socket.io server");
+    });
+
+    socket.on("disconnect", () => {
+      console.log("Disconnected from socket.io server");
+    });
+  }, []);
 
   // Reciver user Details
-  let CurrentUserDetails = useContext(setCurrentUserDetailsGlobal);
   const [ReciverDetails, setReciverDetails] = useState({});
 
   // Get Chats from databaseId and set Chats
-  const [resultChats, setresultChats] = useState(<></>);
+  const [resultChats, setresultChats] = useState([]);
 
   useEffect(() => {
     const fetchChats = async () => {
-      console.log("Rendered");
       await GetChats(props.databaseId, setresultChats, SessionUser);
       var elem = document.getElementById("chat--container");
       elem.scrollIntoView({ behavior: "smooth" });
+      // scroll to top
       elem.scrollTop = elem.scrollHeight;
     };
     fetchChats();
   }, [props.databaseId, SessionUser]);
+
+  console.log(resultChats);
+
+  const mappingChat = resultChats.map((e) => {
+    try {
+      const ObjectData = JSON.parse(e);
+      if (ObjectData.sendersId === SessionUser.id) {
+        return <ReciverChats pngData={ObjectData.imgLink} />;
+      } else {
+        return <SenderChats pngData={ObjectData.imgLink} />;
+      }
+    } catch (err) {
+      console.log("No history exsist");
+      return <div></div>;
+    }
+  });
 
   useEffect(() => {
     setReciverDetails({
@@ -63,12 +93,13 @@ function UserChats(props) {
     sketchRef.current.exportImage("png").then((data) => {
       SvgUpload(data, SessionUser, ReciverDetails).then(async (e) => {
         e.json().then(async (data) => {
-          const image = await fetch(data.ImageUrl);
-          const imageJson = await image.text();
-          const newChat = <ReciverChats pngData={imageJson} />;
-          setresultChats((prev) => {
-            return [...prev, newChat];
-          });
+          console.log(data);
+          const newChat = { imgLink: data.ImageUrl, sendersId: SessionUser.id };
+          if (resultChats === []) {
+            setresultChats([JSON.stringify(newChat)]);
+          } else {
+            setresultChats([...resultChats, JSON.stringify(newChat)]);
+          }
           sketchRef.current.clearCanvas();
           var elem = document.getElementById("chat--container");
           elem.scrollTop = elem.scrollHeight;
@@ -88,7 +119,7 @@ function UserChats(props) {
         </div>
       </div>
       <div className="chats--space" id="chat--container">
-        {resultChats}
+        {mappingChat}
       </div>
       <div className="chat--tools">
         <div className="scribble--pad--tools">
