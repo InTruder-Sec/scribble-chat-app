@@ -41,7 +41,6 @@ export const ChatHandeler = async (req, res) => {
           let R_USERNAME = req.body.ReciverDetails.username;
           //   Check whether the chat history of user exist ? Update the document : Create an new object inside the same document
           let DoesExist = await UserHistoryMap(S_CH, R_USERNAME);
-          console.log(DoesExist);
           if (DoesExist) {
             // Update the document, Other Users's Chat History
             PushToAppwrite(DoesExist, S_ID, URL);

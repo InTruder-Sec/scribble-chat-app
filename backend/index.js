@@ -42,6 +42,10 @@ socketIO.on("connection", (socket) => {
     socket.join(roomId);
   });
 
+  socket.on("send-message", (data) => {
+    socket.in(data.room).emit("receive-message", data);
+  });
+
   socket.on("send", (data) => {
     socketIO.to(data.room).emit("receive-message", data);
   });

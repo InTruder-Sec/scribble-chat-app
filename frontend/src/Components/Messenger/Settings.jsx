@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import endpoint from "../..";
 
 function Settings(props) {
-  console.log(props);
   const navigate = useNavigate();
   const style = {
     position: "absolute",

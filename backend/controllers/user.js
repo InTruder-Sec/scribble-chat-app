@@ -41,7 +41,6 @@ export const getUser = async (req, res) => {
     }
   } catch (err) {
     console.log(err);
-    console.log("Something went wrong");
     return res
       .status(500)
       .json({

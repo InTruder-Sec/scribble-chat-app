@@ -86,7 +86,6 @@ function ResetPass(props) {
         `${endpoint}users/verifyOTP?otp=${otp}&token=${token}&pass=${password}`
       );
       const data = await response.json();
-      console.log(data);
       if (data.code === 200) {
         navigate(`/`);
       } else {

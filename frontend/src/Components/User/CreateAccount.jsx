@@ -28,7 +28,6 @@ function CreateAccount(props) {
     });
     try {
       const data = await res.json();
-      console.log(data);
       if (data.code === 11000) {
         if (data.keyValue.username === username) {
           setErrState(`${username} is already used!`);
@@ -47,7 +46,6 @@ function CreateAccount(props) {
         setinvalidStyles({ display: "block" });
       }
     } catch (err) {
-      console.log(err);
       setinvalidStyles({ display: "block" });
     }
   }

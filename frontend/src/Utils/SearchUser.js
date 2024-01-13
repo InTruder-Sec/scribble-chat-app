@@ -4,7 +4,6 @@ import endpoint from "..";
 const SearchForUser = async (val, setsearchData) => {
   try {
     const data = await fetch(
-      // `http://localhost:5000/users/search?username=${val}&userId=${UserSessionDetails.id}`,
       `${endpoint}users/search?username=${val}`,
       {
         method: "get",

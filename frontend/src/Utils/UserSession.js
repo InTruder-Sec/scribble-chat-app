@@ -21,16 +21,6 @@ const CheckSession = async (setloading) => {
     } else {
       setloading(false);
       return { data: res.data, code: 200, redirect: false };
-      //   setUserSessionDetails(res.data);
-      //   if (res.data.chat_history.length === 0) {
-      //     setwalkthrough(
-      //       <Popup
-      //         content="Get started by searching for your friends by their username and start chatting with them."
-      //         position={{ mt: "170px", ml: "50px" }}
-      //         setwalkthrough={setwalkthrough}
-      //       />
-      //     );
-      //   }
     }
   } catch (err) {
     console.log(err);

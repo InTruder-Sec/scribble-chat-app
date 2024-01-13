@@ -13,8 +13,6 @@ const SenderChats = ({ pngData }) => {
     });
   }, [pngData]);
 
-  // setskeleton loading
-
   return (
     <>
       <div className="s--chat--main">

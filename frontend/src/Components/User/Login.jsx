@@ -41,7 +41,6 @@ function Login(props) {
       if (data.data.id === null) {
         setinvalidStyles({ display: "block" });
         setloading(false);
-        console.log("Error");
       } else {
         navigate("./messenger");
         setloading(false);

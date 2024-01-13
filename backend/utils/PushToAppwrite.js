@@ -19,7 +19,6 @@ function PushToAppwrite(DocId, SendersId, URL) {
       imgLink: URL,
       sendersId: SendersId,
     };
-    console.log("Pushing to appwrite");
     let final = e.History;
     newData = JSON.stringify(newData);
     final.push(newData);

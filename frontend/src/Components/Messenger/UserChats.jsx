@@ -1,7 +1,7 @@
 import { ReactSketchCanvas } from "react-sketch-canvas";
 import "./UserChats.css";
 import send from "./../../images/send.png";
-import { UserDetailsGlobal, setCurrentUserDetailsGlobal } from "./Messenger";
+import { UserDetailsGlobal, CurrentUserDetailsGlobal } from "./Messenger";
 import { useContext, useEffect, useRef, useState } from "react";
 import { SvgUpload } from "../../Utils/SendChats";
 import GetChats from "../../Utils/GetChats";
@@ -12,19 +12,10 @@ import endpoint from "../..";
 function UserChats(props) {
   // Logged in user details
   let SessionUser = useContext(UserDetailsGlobal);
-  useEffect(() => {
-    const socket = socketIO.connect("http://localhost:4000");
+  const CurrentUser = useContext(CurrentUserDetailsGlobal);
 
-    // fetch(`${endpoint}users/getroomid?id=${}`);
-
-    socket.on("connect", () => {
-      console.log("Connected to socket.io server");
-    });
-
-    socket.on("disconnect", () => {
-      console.log("Disconnected from socket.io server");
-    });
-  }, []);
+  const [roomId, setroomId] = useState("");
+  const socket = socketIO.connect("http://localhost:4000");
 
   // Reciver user Details
   const [ReciverDetails, setReciverDetails] = useState({});
@@ -43,8 +34,6 @@ function UserChats(props) {
     fetchChats();
   }, [props.databaseId, SessionUser]);
 
-  console.log(resultChats);
-
   const mappingChat = resultChats.map((e) => {
     try {
       const ObjectData = JSON.parse(e);
@@ -54,7 +43,6 @@ function UserChats(props) {
         return <SenderChats pngData={ObjectData.imgLink} />;
       }
     } catch (err) {
-      console.log("No history exsist");
       return <div></div>;
     }
   });
@@ -89,12 +77,43 @@ function UserChats(props) {
     sketchRef.current.eraseMode(status);
   };
 
+  useEffect(() => {
+    fetch(
+      `${endpoint}users/getroomid?user=${CurrentUser.username}&id=${SessionUser.id}`
+    ).then((e) => {
+      e.json().then((data) => {
+        setroomId(data.roomId);
+        socket.emit("join-room", data.roomId);
+      });
+    });
+
+    socket.on("connect", () => {
+      console.log("Connected to socket.io server");
+    });
+
+    socket.on("receive-message", (data) => {
+      if (data.message.sendersId !== SessionUser.id) {
+        setresultChats([...resultChats, JSON.stringify(data.message)]);
+      }
+      var elem = document.getElementById("chat--container");
+      elem.scrollTop = elem.scrollHeight;
+      elem.scrollIntoView({ behavior: "smooth" });
+    });
+
+    socket.on("disconnect", () => {
+      console.log("Disconnected from socket.io server");
+    });
+  }, [CurrentUser, SessionUser, socket, resultChats]);
+
   function SVGhandler() {
     sketchRef.current.exportImage("png").then((data) => {
       SvgUpload(data, SessionUser, ReciverDetails).then(async (e) => {
         e.json().then(async (data) => {
-          console.log(data);
           const newChat = { imgLink: data.ImageUrl, sendersId: SessionUser.id };
+          socket.emit("send-message", {
+            room: roomId,
+            message: newChat,
+          });
           if (resultChats === []) {
             setresultChats([JSON.stringify(newChat)]);
           } else {

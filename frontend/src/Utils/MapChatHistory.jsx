@@ -1,4 +1,3 @@
-// import UserProfile from "../Components/Messenger/UserProfile";
 import { useContext } from "react";
 import { UserDetailsGlobal } from "../Components/Messenger/Messenger";
 import UserProfile from "../Components/Messenger/UserProfile";

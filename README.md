@@ -31,6 +31,14 @@ _⚠️Note: You will require a `.env` file with the following values_
 
     BUCKET_ID=APPWRITE_BACKET_ID
 
+    MAIL_SERVER=SMTP_MAIL_SERVER
+
+    MAIL_PORT=SMTP_SERVER_PORT
+
+    MAIL_USER=USERNAME_SMTP_SERVER
+
+    MAIL_PASS=PASSWORD_OF_SMTP_SERVER
+
 ```
 cd backend
 npm i

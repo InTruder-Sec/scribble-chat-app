@@ -1,7 +1,6 @@
 import endpoint from "..";
 
 export async function SvgUpload(data, SessionUser, ReciverDetails) {
-  console.log(SessionUser, ReciverDetails);
   try {
     const res = await fetch(`${endpoint}users/sendChat`, {
       method: "POST",
