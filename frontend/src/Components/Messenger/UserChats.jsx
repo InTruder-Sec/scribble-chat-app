@@ -7,7 +7,7 @@ import { SvgUpload } from "../../Utils/SendChats";
 import GetChats from "../../Utils/GetChats";
 import { ReciverChats, SenderChats } from "./ChatDesigns";
 import socketIO from "socket.io-client";
-import endpoint from "../..";
+import endpoint from "../../index.js";
 
 function UserChats(props) {
   // Logged in user details
@@ -15,7 +15,7 @@ function UserChats(props) {
   const CurrentUser = useContext(CurrentUserDetailsGlobal);
 
   const [roomId, setroomId] = useState("");
-  const socket = socketIO.connect("http://localhost:4000");
+  const socket = socketIO.connect(endpoint);
 
   // Reciver user Details
   const [ReciverDetails, setReciverDetails] = useState({});

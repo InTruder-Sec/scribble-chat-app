@@ -11,7 +11,7 @@ dotenv.config();
 
 const app = express();
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "https://scribblechat.netlify.app",
   credentials: true,
 };
 
@@ -26,7 +26,7 @@ const httpServer = http.createServer(app);
 
 const socketIO = new Server(httpServer, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "https://scribblechat.netlify.app",
     credentials: true,
   },
 });
@@ -57,4 +57,4 @@ app.use("/users", userRouter);
 // Connect to MongoDB
 const connection = await mongoose.connect(process.env.SERVER_URL);
 
-httpServer.listen(4000, () => console.log(`Listening on port 4000`));
+httpServer.listen(8080, () => console.log(`Listening on port 8080`));
