@@ -114,7 +114,7 @@ function Login(props) {
           </div>
         </form>
         <div className="oauth">
-          <div className="oauth--icon">
+          <div className="oauth--icon" onClick={() => {alert("Sorry...Oauth is currently unavailable!")}}>
             <svg
               width="45px"
               height="45px"
@@ -152,7 +152,7 @@ function Login(props) {
               </g>
             </svg>
           </div>
-          <div className="oauth--icon">
+          <div className="oauth--icon" onClick={() => {alert("Sorry...Oauth is currently unavailable!")}}>
             <svg
               fill="#000000"
               width="45px"
@@ -186,7 +186,7 @@ function Login(props) {
               </g>
             </svg>
           </div>
-          <div className="oauth--icon">
+          <div className="oauth--icon" onClick={() => {alert("Sorry...Oauth is currently unavailable!")}}>
             <svg
               fill="#000000"
               version="1.1"
