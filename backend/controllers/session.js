@@ -2,10 +2,10 @@ import jwt from "jsonwebtoken";
 import UsersData from "../models/user.js";
 
 export const userSession = async (req, res) => {
-  if (!req.cookies.token) {
+  const token = req.headers.token;
+  if (!token) {
     res.status(200).json({ message: "Invalid token", code: 500 });
   } else {
-    const token = req.cookies.token;
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       try {
