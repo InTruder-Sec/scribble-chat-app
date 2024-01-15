@@ -9,7 +9,7 @@ const databases = new sdk.Databases(client);
 
 client
   .setEndpoint("https://cloud.appwrite.io/v1")
-  .setProject("64a7ac5899392aecc83b")
+  .setProject("65a5452276df1de24e07")
   .setKey(process.env.API_KEY);
 
 function CreateNewChat(R_ID, S_ID, URL, S_USERNAME, R_USERNAME, socketId) {

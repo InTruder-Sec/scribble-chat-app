@@ -9,9 +9,11 @@ import { userRouter } from "./routes/user.js";
 
 dotenv.config();
 
+
+
 const app = express();
 const corsOptions = {
-  origin: "https://scribblechat.netlify.app",
+  origin: process.env.ENDPOINT,
   credentials: true,
 };
 
@@ -26,7 +28,7 @@ const httpServer = http.createServer(app);
 
 const socketIO = new Server(httpServer, {
   cors: {
-    origin: "https://scribblechat.netlify.app",
+    origin: process.env.ENDPOINT,
     credentials: true,
   },
 });

@@ -4,7 +4,7 @@ Your go-to chat app to send scribbled images to your friends. Scribble is a real
 
 ### 🔗 Link
 
-[Deploying Soon ](/)
+[Deploy Link]("https://scribblechat.netlify.app")
 
 ### 💻 Local Environment
 
@@ -20,6 +20,8 @@ npm run dev
 **Back-End**
 
 _⚠️Note: You will require a `.env` file with the following values_
+
+    ENDPOINT=FRONTEND_ENDPOINT
 
     SERVER_URL=MONGODB_CLUSTER_URL
 
@@ -39,6 +41,7 @@ _⚠️Note: You will require a `.env` file with the following values_
 
     MAIL_PASS=PASSWORD_OF_SMTP_SERVER
 
+    Also change the Project ID
 ```
 cd backend
 npm i

@@ -11,7 +11,7 @@ const getRoomId = async (req, res) => {
           return;
         }
       });
-    });
+    })
   } catch (err) {
     console.log(err);
   }

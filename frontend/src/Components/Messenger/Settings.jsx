@@ -23,7 +23,7 @@ function Settings(props) {
   // Logout function remove cookie and redirect to login page
   const Logout = async () => {
     try {
-      await fetch(`${endpoint}users/logout`, {
+      await fetch(`${endpoint}/users/logout`, {
         method: "GET",
         credentials: "include",
       });

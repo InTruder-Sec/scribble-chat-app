@@ -12,25 +12,24 @@ const client = new sdk.Client();
 
 const storage = new sdk.Storage(client);
 
+
 client
   .setEndpoint("https://cloud.appwrite.io/v1")
-  .setProject("64a7ac5899392aecc83b")
+  .setProject("65a5452276df1de24e07")
   .setKey(process.env.API_KEY);
-
+  
 export const ChatHandeler = async (req, res) => {
   const data = req.body.svg;
   try {
-    writeFile("temp/image.png", data).then(() => {
-      const promise = storage.createFile(
+    const promise = writeFile("temp/image.png", data).then(() => {
+      storage.createFile(
         process.env.BUCKET_ID,
         ID.unique(),
         InputFile.fromPath("temp/image.png", "image.png")
-      );
-
-      promise.then(
-        async function (response) {
-          unlink("temp/image.png");
-          const URL = `https://cloud.appwrite.io/v1/storage/buckets/${response.bucketId}/files/${response.$id}/view?project=64a7ac5899392aecc83b`;
+      ).then(async (response) => {
+        // unlink("temp/image.png");
+          console.log(response)
+          const URL = `https://cloud.appwrite.io/v1/storage/buckets/${response.bucketId}/files/${response.$id}/view?project=65a5452276df1de24e07`;
           // User Details
 
           let S_ID = req.body.SessionUser.id;
@@ -57,13 +56,12 @@ export const ChatHandeler = async (req, res) => {
               .status(200)
               .json({ message: "Chat successfilly added!", ImageUrl: URL });
           }
-        },
-        function (error) {
-          res.status(200).json({ message: "NO" });
-          console.log(error);
-        }
+      }).catch((err) => {
+        console.log(err);
+      }
       );
-    });
+    }
+    );
   } catch (err) {
     console.log(err);
     res.status(501).json({ messeage: "Internal server occured" });

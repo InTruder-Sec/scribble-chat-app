@@ -3,7 +3,7 @@ import endpoint from "./../index";
 
 const GetChats = async (id, setresultChats, SessionUser) => {
   try {
-    const res = await fetch(`${endpoint}users/getchats?id=${id}`);
+    const res = await fetch(`${endpoint}/users/getchats?id=${id}`);
     const data = await res.json();
     if (data.data.length === 0) {
       setresultChats([]);

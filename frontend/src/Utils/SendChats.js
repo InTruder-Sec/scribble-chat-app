@@ -2,7 +2,7 @@ import endpoint from "..";
 
 export async function SvgUpload(data, SessionUser, ReciverDetails) {
   try {
-    const res = await fetch(`${endpoint}users/sendChat`, {
+    const res = await fetch(`${endpoint}/users/sendChat`, {
       method: "POST",
       mode: "cors",
       headers: {

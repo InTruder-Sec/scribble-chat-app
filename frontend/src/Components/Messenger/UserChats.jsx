@@ -79,7 +79,7 @@ function UserChats(props) {
 
   useEffect(() => {
     fetch(
-      `${endpoint}users/getroomid?user=${CurrentUser.username}&id=${SessionUser.id}`
+      `${endpoint}/users/getroomid?user=${CurrentUser.username}&id=${SessionUser.id}`
     ).then((e) => {
       e.json().then((data) => {
         setroomId(data.roomId);

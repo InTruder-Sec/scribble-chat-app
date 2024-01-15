@@ -17,7 +17,7 @@ function CreateAccount(props) {
   const [email, setemail] = useState("");
 
   async function CreateNewUser() {
-    const res = await fetch(`${endpoint}users/create`, {
+    const res = await fetch(`${endpoint}/users/create`, {
       method: "POST",
       mode: "cors",
       headers: {

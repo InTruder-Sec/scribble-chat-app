@@ -28,7 +28,7 @@ function Login(props) {
     setloading(true);
     try {
       const response = await fetch(
-        `${endpoint}users/verify?email=${email}&pass=${password}`,
+        `${endpoint}/users/verify?email=${email}&pass=${password}`,
         {
           method: "GET",
           credentials: "include",

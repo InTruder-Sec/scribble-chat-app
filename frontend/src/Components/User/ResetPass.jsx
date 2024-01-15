@@ -83,7 +83,7 @@ function ResetPass(props) {
     token = token.split("=")[1];
     try {
       const response = await fetch(
-        `${endpoint}users/verifyOTP?otp=${otp}&token=${token}&pass=${password}`
+        `${endpoint}/users/verifyOTP?otp=${otp}&token=${token}&pass=${password}`
       );
       const data = await response.json();
       if (data.code === 200) {
