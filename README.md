@@ -4,7 +4,7 @@ Your go-to chat app to send scribbled images to your friends. Scribble is a real
 
 ### 🔗 Link
 
-[Deploy Link]("https://scribblechat.netlify.app")
+[Deploy Link](https://scribblechat.netlify.app)
 
 ### 💻 Local Environment
 
