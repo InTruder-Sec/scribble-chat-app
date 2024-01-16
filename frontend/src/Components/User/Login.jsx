@@ -37,11 +37,12 @@ function Login(props) {
           },
         }
       );
-      const data = await response.json();
+      const data = await response.json()
       if (data.data.id === null) {
         setinvalidStyles({ display: "block" });
         setloading(false);
       } else {
+        document.cookie = `token=${data.data.token}; path=${endpoint};`
         navigate("./messenger");
         setloading(false);
       }

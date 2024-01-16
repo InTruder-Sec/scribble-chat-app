@@ -10,6 +10,9 @@ import socketIO from "socket.io-client";
 import endpoint from "../../index.js";
 
 function UserChats(props) {
+  const [isLoading, setIsLoading] = useState(false);
+
+
   // Logged in user details
   let SessionUser = useContext(UserDetailsGlobal);
   const CurrentUser = useContext(CurrentUserDetailsGlobal);
@@ -107,24 +110,29 @@ function UserChats(props) {
 
   function SVGhandler() {
     sketchRef.current.exportImage("png").then((data) => {
-      SvgUpload(data, SessionUser, ReciverDetails).then(async (e) => {
-        e.json().then(async (data) => {
-          const newChat = { imgLink: data.ImageUrl, sendersId: SessionUser.id };
-          socket.emit("send-message", {
-            room: roomId,
-            message: newChat,
+      if(!isLoading) {
+        setIsLoading(true);
+        SvgUpload(data, SessionUser, ReciverDetails).then(async (e) => {
+          e.json().then(async (data) => {
+            const newChat = { imgLink: data.ImageUrl, sendersId: SessionUser.id };
+            socket.emit("send-message", {
+              room: roomId,
+              message: newChat,
+            });
+            if (resultChats === []) {
+              setresultChats([JSON.stringify(newChat)]);
+            } else {
+              setresultChats([...resultChats, JSON.stringify(newChat)]);
+            }
+            sketchRef.current.clearCanvas();
+            var elem = document.getElementById("chat--container");
+            elem.scrollTop = elem.scrollHeight;
+            elem.scrollIntoView({ behavior: "smooth" });
+            setIsLoading(false);
           });
-          if (resultChats === []) {
-            setresultChats([JSON.stringify(newChat)]);
-          } else {
-            setresultChats([...resultChats, JSON.stringify(newChat)]);
-          }
-          sketchRef.current.clearCanvas();
-          var elem = document.getElementById("chat--container");
-          elem.scrollTop = elem.scrollHeight;
-          elem.scrollIntoView({ behavior: "smooth" });
         });
-      });
+      } 
+      
     });
   }
 
@@ -179,8 +187,11 @@ function UserChats(props) {
             Undo
           </div>
         </div>
-        <div className="send" onClick={SVGhandler}>
-          <img className="send--img" alt="send" src={send}></img>
+        <div className="send" onClick={SVGhandler}  >
+          <img className="send--img" alt="send" src={send} style={
+            {filter: `${isLoading ? "grayscale(100%)" : "grayscale(50%)"}, ${isLoading ? "brightness(0.5)" : "opacity(0.5)"}`
+          }
+          } ></img>
         </div>
       </div>
     </div>
