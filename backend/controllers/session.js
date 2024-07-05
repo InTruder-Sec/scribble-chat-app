@@ -2,7 +2,8 @@ import jwt from "jsonwebtoken";
 import UsersData from "../models/user.js";
 
 export const userSession = async (req, res) => {
-  const token = req.headers.token;
+  const token = req.cookies.token;
+  // console.log(req.cookies.token)
   if (!token) {
     res.status(200).json({ message: "Invalid token", code: 500 });
   } else {

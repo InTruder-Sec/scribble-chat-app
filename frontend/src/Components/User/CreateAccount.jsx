@@ -4,6 +4,7 @@ import logo from "./../../images/logo.png";
 import "./Style.css";
 import { ChangeToLogin } from "./Main";
 import endpoint from "../..";
+import { toast } from "react-toastify";
 
 function CreateAccount(props) {
   const displayNone = {
@@ -15,8 +16,12 @@ function CreateAccount(props) {
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
   const [email, setemail] = useState("");
+  const [Loading, setisLoading] = useState(false);
 
   async function CreateNewUser() {
+    if (Loading) return;
+    setisLoading(true);
+    
     const res = await fetch(`${endpoint}/users/create`, {
       method: "POST",
       mode: "cors",
@@ -40,6 +45,7 @@ function CreateAccount(props) {
           setinvalidStyles({ display: "block" });
         }
       } else if (data.code === 200) {
+        toast("Account created! Please login to continue.")
         ChangeToLogin(props.setRotate, props.setComponentMain);
       } else {
         setErrState("Something went wrong!");
@@ -105,8 +111,9 @@ function CreateAccount(props) {
           <div className="padding">
             <input
               type="submit"
+              disabled={Loading}
               className="login--btn"
-              value="Create Account"
+              value={`${Loading ? "Loading..." : "Create account"}`}
             ></input>
           </div>
           <div className="padding"></div>

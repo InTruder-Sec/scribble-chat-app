@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Messenger from "./Components/Messenger/Messenger";
 import Main from "./Components/User/Main";
 import ResetPass from "./Components/User/ResetPass";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 // App theme
 const ToggleTheme = (theme) => {
@@ -23,6 +25,7 @@ function App() {
 
   return (
     <div className="app">
+      <ToastContainer hideProgressBar={true} />
       <BrowserRouter>
         <Routes>
           <Route path="/" exact element={<Main />}></Route>

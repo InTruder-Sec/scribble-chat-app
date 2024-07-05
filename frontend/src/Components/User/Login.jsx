@@ -5,6 +5,7 @@ import "./Style.css";
 import logo from "./../../images/logo.png";
 import { ChangeToCreateAccount, ChangeToForgotPass } from "./Main";
 import endpoint from "../..";
+import { toast } from "react-toastify";
 
 function Login(props) {
   // Invalid username password styles
@@ -43,6 +44,7 @@ function Login(props) {
         setloading(false);
       } else {
         document.cookie = `token=${data.data.token}; path=${endpoint};`
+        toast("Login successful!")
         navigate("./messenger");
         setloading(false);
       }
@@ -115,7 +117,7 @@ function Login(props) {
           </div>
         </form>
         <div className="oauth">
-          <div className="oauth--icon" onClick={() => {alert("Sorry...Oauth is currently unavailable!")}}>
+          <div className="oauth--icon" onClick={() => {toast("OAuth is not currently enabled!")}}>
             <svg
               width="45px"
               height="45px"
@@ -153,7 +155,7 @@ function Login(props) {
               </g>
             </svg>
           </div>
-          <div className="oauth--icon" onClick={() => {alert("Sorry...Oauth is currently unavailable!")}}>
+          <div className="oauth--icon" onClick={() => {toast("OAuth is not currently enabled!")}}>
             <svg
               fill="#000000"
               width="45px"
@@ -187,7 +189,7 @@ function Login(props) {
               </g>
             </svg>
           </div>
-          <div className="oauth--icon" onClick={() => {alert("Sorry...Oauth is currently unavailable!")}}>
+          <div className="oauth--icon" onClick={() => {toast("OAuth is not currently enabled!")}}>
             <svg
               fill="#000000"
               version="1.1"

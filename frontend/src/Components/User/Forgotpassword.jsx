@@ -20,6 +20,7 @@ function ForgotPassword(props) {
   const [Email, setEmail] = useState("");
   async function SendOTP() {
     setloading(true);
+    if(loading) return;
     try {
       const res = await fetch(`${endpoint}/users/sendotp?email=${Email}`);
       const data = await res.json();
