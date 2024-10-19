@@ -29,6 +29,7 @@ export const getUser = async (req, res) => {
         // set token as cookie with same site = trur
         res.cookie("token", token, {
           maxAge: 7 * 24 * 60 * 60 * 1000,
+          sameSite: "none",
         });
 
         return res.status(200).json({
