@@ -3,7 +3,7 @@ import UsersData from "../models/user.js";
 
 export const userSession = async (req, res) => {
   const token = req.cookies.token;
-  console.log(req.cookies.token);
+  console.log(req);
   if (!token) {
     res.status(200).json({ message: "Invalid token", code: 500 });
   } else {
