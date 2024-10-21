@@ -29,14 +29,15 @@ export const getUser = async (req, res) => {
         // set token as cookie with same site = trur
         res.cookie("token", token, {
           maxAge: 7 * 24 * 60 * 60 * 1000,
-          httpOnly: true,
-          SameSite: "none",
-          secure: true,
         });
 
-        return res
-          .status(200)
-          .json({ data: { message: "Logged in successfully", id: data.id, token: token } });
+        return res.status(200).json({
+          data: {
+            message: "Logged in successfully",
+            id: data.id,
+            token: token,
+          },
+        });
       } else {
         return res
           .status(200)
@@ -49,11 +50,9 @@ export const getUser = async (req, res) => {
     }
   } catch (err) {
     console.log(err);
-    return res
-      .status(500)
-      .json({
-        data: { message: "Something went wrong on our side: (", id: null },
-      });
+    return res.status(500).json({
+      data: { message: "Something went wrong on our side: (", id: null },
+    });
   }
 };
 
