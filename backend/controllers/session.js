@@ -3,12 +3,13 @@ import UsersData from "../models/user.js";
 
 export const userSession = async (req, res) => {
   const token = req.cookies.token;
-  // console.log(req.cookies.token)
+  console.log(req.cookies.token);
   if (!token) {
     res.status(200).json({ message: "Invalid token", code: 500 });
   } else {
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      console.log(decoded);
       try {
         UsersData.findById(decoded.id).then((data) => {
           if (data != null) {
