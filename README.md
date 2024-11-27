@@ -1,10 +1,10 @@
-# scribble-chat-app
+# Scribble Chat App
 
-Your go-to chat app to send scribbled images to your friends. Scribble is a real-time chat application that offers seamless communication through scribble pad.
+Your go-to chat app to send scribbled images to your friends. Scribble is a real-time chat application that offers seamless communication through scribble pad. Built user authentication with bcrypt, including manual login, registration, and password reset using NodeMailer. Integrated Appwrite cloud services for seamless image storage and retrieval, ensuring scalability and performance.
 
-### 🔗 Link
+### 🔗 Experience it Live
 
-[Deploy Link](https://scribblechat.netlify.app)
+Explore the live deployment at - [Deploy Link](https://sc.deepdhakate.in)
 
 ### 💻 Local Environment
 
@@ -14,34 +14,28 @@ Your go-to chat app to send scribbled images to your friends. Scribble is a real
 cd frontend
 npm i
 npm run dev
-
 ```
 
 **Back-End**
 
-_⚠️Note: You will require a `.env` file with the following values_
+> [!IMPORTANT]  
+> You will require a `.env` file with the following values
 
-    ENDPOINT=FRONTEND_ENDPOINT
+```
+ENDPOINT=FRONTEND_ENDPOINT_TO_AVOID_CORS
+SERVER_URL=MONGODB_CLUSTER_URL
+JWT_SECRET=ANY_RANDOM_JWT_SECRET
+DATABASE_ID=APPWRITE_DATABASE_ID
+COLLECTION_ID=APPWRITE_COLLECTION_ID
+BUCKET_ID=APPWRITE_BACKET_ID
+MAIL_SERVER=SMTP_MAIL_SERVER
+MAIL_PORT=SMTP_SERVER_PORT
+MAIL_USER=USERNAME_SMTP_SERVER
+MAIL_PASS=PASSWORD_OF_SMTP_SERVER
+```
 
-    SERVER_URL=MONGODB_CLUSTER_URL
+**Start Commands**
 
-    JWT_SECRET=ANY_RANDOM_JWT_SECRET
-
-    DATABASE_ID=APPWRITE_DATABASE_ID
-
-    COLLECTION_ID=APPWRITE_COLLECTION_ID
-
-    BUCKET_ID=APPWRITE_BACKET_ID
-
-    MAIL_SERVER=SMTP_MAIL_SERVER
-
-    MAIL_PORT=SMTP_SERVER_PORT
-
-    MAIL_USER=USERNAME_SMTP_SERVER
-
-    MAIL_PASS=PASSWORD_OF_SMTP_SERVER
-
-    Also change the Project ID
 ```
 cd backend
 npm i
